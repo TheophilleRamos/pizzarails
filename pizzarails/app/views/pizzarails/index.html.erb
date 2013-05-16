@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pizzarails: Home</title>
+    <style type="text/css" media="screen">
+      body {
+        margin: 0;
+        margin-bottom: 25px;
+        padding: 0;
+        background-color: #f0f0f0;
+        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+        font-size: 13px;
+        color: #333;
+      }
+
+      h1 {
+        font-size: 28px;
+        color: #000;
+      }
+
+      a  {color: #03c}
+      a:hover {
+        background-color: #03c;
+        color: white;
+        text-decoration: none;
+      }
+
+
+      #page {
+        background-color: #f0f0f0;
+        width: 750px;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #content {
+        float: left;
+        background-color: white;
+        border: 3px solid #aaa;
+        border-top: none;
+        padding: 25px;
+        width: 900px;
+      }
+
+      
+
+      #footer {
+        clear: both;
+      }
+
+      
+
+      
+      #header h1, #header h2 {margin: 0}
+      #header h2 {
+        color: #888;
+        font-weight: normal;
+        font-size: 16px;
+      }
+
+
+      #about h3 {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      #about-content {
+        background-color: #ffd;
+        border: 1px solid #fc0;
+        margin-left: -55px;
+        margin-right: -10px;
+      }
+      #about-content table {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        border-collapse: collapse;
+      }
+      #about-content td {
+        padding: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      #about-content td.name  {color: #555}
+      #about-content td.value {color: #000}
+
+      #about-content ul {
+        padding: 0;
+        list-style-type: none;
+      }
+
+      #about-content.failure {
+        background-color: #fcc;
+        border: 1px solid #f00;
+      }
+      #about-content.failure p {
+        margin: 0;
+        padding: 10px;
+      }
+
+
+
+      .filename {
+        font-style: italic;
+      }
+    </style>
+    <script type="text/javascript">
+      function about() {
+        info = document.getElementById('about-content');
+        if (window.XMLHttpRequest)
+          { xhr = new XMLHttpRequest(); }
+        else
+          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
+        xhr.open("GET","rails/info/properties",false);
+        xhr.send("");
+        info.innerHTML = xhr.responseText;
+        info.style.display = 'block'
+      }
+    </script>
+  </head>
+  <body>
+    
+
+     <div id="content">
+        <div id="header">
+       
+     </div>
+                         
+     
+
+        <h1>PizzaRails</h1>
+        <h2>Tabela de pedidos</h2>
+        <table border="1">
+          <tr>
+            <th>Sabor</th>
+            <th>Tamanho</th>
+            <th>Endereço do pedinte</th>
+            <th>Telefone</th>
+            <th>Acompanhamento</th>
+            <th>Preço R$</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @pizzarails.each do |pizzarail| %>
+          <tr>
+            <td><%= pizzarail.name %></td>
+            <td><%= pizzarail.size %></td>
+            <td><%= pizzarail.address %></td>
+            <td><%= pizzarail.phone %></td>
+            <td><%= pizzarail.side_order %></td>
+            <td><%= pizzarail.price %></td>
+            <td><%= link_to 'Mostrar', pizzarail %></td>
+            <td><%= link_to 'Editar', edit_pizzarail_path(pizzarail) %></td>
+            <td><%= link_to 'Excluir', pizzarail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+        </table>
+
+        <br />
+
+        <%= link_to 'Novo Pedido', new_pizzarail_path %>
+
+   
+                    
+ <div id="footer">&nbsp;</div>
+    </div>
+  </body>
+</html>
